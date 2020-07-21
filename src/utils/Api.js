@@ -1,4 +1,6 @@
-export default class Api {
+import {token, baseUrl, cohort} from './constants.js';
+
+class Api {
   constructor(token, baseUrl, cohort) {
     this._token = token;
     this._baseUrl = `${baseUrl}${cohort}`;
@@ -92,3 +94,7 @@ export default class Api {
   }
 
 }
+
+const api = new Api(token, baseUrl, cohort);
+
+export default api

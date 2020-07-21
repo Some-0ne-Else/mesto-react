@@ -1,4 +1,4 @@
-import FormValidator from '../components/FormValidator.js';
+
 /* page elements const */
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
@@ -10,9 +10,7 @@ const profileAvatar = document.querySelector('.profile__avatar');
 const popupFullName = document.querySelector('#full-name');
 const popupVocation = document.querySelector('#vocation');
 const popupAvatar = document.querySelector('#link');
-const editActionButton = document.querySelector('.popup_edit').querySelector('.popup__action-button');
-const avatarActionButton = document.querySelector('.popup_avatar').querySelector('.popup__action-button');
-const addActionButton = document.querySelector('.popup_add').querySelector('.popup__action-button');
+
 /* config */
 const targetContainer = '.elements'; // target for inserting new instances of Card
 const cardTemplate = '.element__template';
@@ -32,9 +30,9 @@ const configValidation = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active'
 };
-const editFormValidaion = new FormValidator(configValidation, ".popup__container_edit");
-const addFormValidation = new FormValidator(configValidation, ".popup__container_add");
-const avatarFormValidation = new FormValidator(configValidation, ".popup__container_avatar");
+// const editFormValidaion = new FormValidator(configValidation, ".popup__container_edit");
+// const addFormValidation = new FormValidator(configValidation, ".popup__container_add");
+// const avatarFormValidation = new FormValidator(configValidation, ".popup__container_avatar");
 
 export {
   editButton,
@@ -49,16 +47,16 @@ export {
   targetContainer,
   cardTemplate,
   configValidation,
-  editFormValidaion,
-  addFormValidation,
-  avatarFormValidation,
+  // editFormValidaion,
+  // addFormValidation,
+  // avatarFormValidation,
   token,
   cohort,
   baseUrl,
   userInfoPostfix,
   cardsPostfix,
   idOnServer,
-  editActionButton,
-  avatarActionButton,
-  addActionButton,
+  // editActionButton,
+  // avatarActionButton,
+  // addActionButton,
 };
