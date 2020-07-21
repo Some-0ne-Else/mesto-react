@@ -1,17 +1,16 @@
 import React from 'react';
 
-function Card({ title, src, alt, likeCounter }) {
+function Card({ title, src, alt, likeCounter, onCardClick }) {
     return (
-        <div class="element">
-            <img class="element__image" src={src} alt={alt} />
-            <button type="button" class="element__delete-button"></button>
-            <p class="element__title">{title}</p>
-            <div class="element__wrapper">
-                <button class="element__like"></button>
-                <p class="element__like-counter">{likeCounter}</p>
+        <div className="element">
+            <img className="element__image" src={src} alt={alt} onClick={onCardClick} />
+            <button type="button" className="element__delete-button"></button>
+            <p className="element__title">{title}</p>
+            <div className="element__wrapper">
+                <button className="element__like"></button>
+                <p className="element__like-counter">{likeCounter}</p>
             </div>
         </div>
-
     );
 }
 

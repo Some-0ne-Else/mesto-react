@@ -1,14 +1,14 @@
 import React from 'react';
 
-function ImagePopup(){
-    return(
-        <section class="popup popup-enlarge">
-        <div class="popup__container-enl">
-          <img class="popup__image" alt="" /><button type="button" class="popup__close-button"></button>
-          <p class="popup__caption"></p>
-        </div>
-      </section>
-    )
+function ImagePopup({ card, isOpen, onClose }) {
+  return (
+    <section className={`popup popup-enlarge ${isOpen && "popup_opened"}`}>
+      <div className="popup__container-enl">
+        <img className="popup__image" src={card.src} alt={card.alt} /><button type="button" className="popup__close-button" onClick={onClose}></button>
+        <p className="popup__caption">{card.alt}</p>
+      </div>
+    </section>
+  )
 }
 
 export default ImagePopup
