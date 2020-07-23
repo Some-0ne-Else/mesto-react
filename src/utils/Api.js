@@ -15,9 +15,6 @@ class Api {
       .then((result) => {
         if (result.ok) { return result.json(); }
         else { return Promise.reject(`Ошибка: ${result.status}`); }
-      })
-      .catch((err) => {
-        console.log(err);
       });
   }
   editProfile(urlPostfix, name, about) {
@@ -32,7 +29,7 @@ class Api {
         about: `${about}`
       })
     })
-      .catch((err) => { console.log(err) });
+      .catch((err) => { console.log(err) }); //Эту часть не трогаю до след практ работы. Но логика ясна.
   }
 
   postCard(urlPostfix, name, link) {

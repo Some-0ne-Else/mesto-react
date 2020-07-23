@@ -20,8 +20,14 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
                 setDescription(about);
                 setAvatar(avatar);
             })
+            .catch((err) => {
+                console.log(err);
+              })
         api.fetchData(cardsPostfix)
             .then((data) => setCards(data))
+            .catch((err) => {
+                console.log(err);
+              })
 
     }, []);
 
