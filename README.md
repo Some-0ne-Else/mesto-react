@@ -15,7 +15,7 @@
 ------
 Проект пережил множество мутаций от pureJS до React.
 
-[**Project on Git Pages**](https://some-0ne-else.github.io/mesto/)
+[**Project on Git Pages**](https://some-0ne-else.github.io/mesto-react/)
 
 
 **Figma**(https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
