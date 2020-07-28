@@ -1,10 +1,10 @@
-.element__like{
+.element__like {
   margin: 31px 22px 0 0;
   height: 19px;
   width: 21px;
   border: 0;
   box-sizing: border-box;
-  background-image: url("../../../images/element__like_image.svg");
+  background-image: url('../../../images/element__like_image.svg');
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: center;
@@ -12,8 +12,7 @@
   outline: none;
 }
 
-.element__like:hover{
-    opacity: 0.6;
-    cursor: pointer;
-  }
-
+.element__like:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}

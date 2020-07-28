@@ -1,4 +1,4 @@
-import {token, baseUrl, cohort} from './constants.js';
+import { token, baseUrl, cohort } from './constants.js';
 
 class Api {
   constructor(token, baseUrl, cohort) {
@@ -9,27 +9,30 @@ class Api {
     return fetch(`${this._baseUrl}${urlPostfix}`, {
       headers: {
         authorization: this._token,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+      },
+    }).then((result) => {
+      if (result.ok) {
+        return result.json();
+      } else {
+        return Promise.reject(`Ошибка: ${result.status}`);
       }
-    })
-      .then((result) => {
-        if (result.ok) { return result.json(); }
-        else { return Promise.reject(`Ошибка: ${result.status}`); }
-      });
+    });
   }
   editProfile(urlPostfix, name, about) {
     return fetch(`${this._baseUrl}${urlPostfix}`, {
       method: 'PATCH',
       headers: {
         authorization: this._token,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         name: `${name}`,
-        about: `${about}`
-      })
-    })
-      .catch((err) => { console.log(err) }); //Эту часть не трогаю до след практ работы. Но логика ясна.
+        about: `${about}`,
+      }),
+    }).catch((err) => {
+      console.log(err);
+    }); //Эту часть не трогаю до след практ работы. Но логика ясна.
   }
 
   postCard(urlPostfix, name, link) {
@@ -37,15 +40,17 @@ class Api {
       method: 'POST',
       headers: {
         authorization: this._token,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         name: `${name}`,
-        link: `${link}`
-      })
+        link: `${link}`,
+      }),
     })
       .then((result) => result.json())
-      .catch((err) => { console.log(err) });
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   deleteCard(urlPostfix) {
@@ -53,19 +58,20 @@ class Api {
       method: 'DELETE',
       headers: {
         authorization: this._token,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-    })
-      .catch((err) => { console.log(err) });
+    }).catch((err) => {
+      console.log(err);
+    });
   }
   likeCard(urlPostfix, cardId, likes, idOnServer, isLiked) {
     let methodValue;
-    isLiked ? methodValue = 'DELETE' : methodValue = 'PUT'
+    isLiked ? (methodValue = 'DELETE') : (methodValue = 'PUT');
     return fetch(`${this._baseUrl}${urlPostfix}/likes/${cardId}`, {
       method: methodValue,
       headers: {
         authorization: this._token,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
     })
       .then((result) => result.json())
@@ -77,21 +83,25 @@ class Api {
       method: 'PATCH',
       headers: {
         authorization: this._token,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        avatar: `${link}`
-      })
+        avatar: `${link}`,
+      }),
     })
       .then((result) => {
-        if (result.ok) { return result.json(); }
-        else { return Promise.reject(`Ошибка: ${result.status}`); }
+        if (result.ok) {
+          return result.json();
+        } else {
+          return Promise.reject(`Ошибка: ${result.status}`);
+        }
       })
-      .catch((err) => { console.log(err) });
+      .catch((err) => {
+        console.log(err);
+      });
   }
-
 }
 
 const api = new Api(token, baseUrl, cohort);
 
-export default api
+export default api;

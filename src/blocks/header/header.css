@@ -1,4 +1,4 @@
-@import url("./__logo/header__logo.css");
+@import url('./__logo/header__logo.css');
 .header {
   display: flex;
   max-width: 882px;
@@ -19,4 +19,3 @@
     margin: 0 auto;
   }
 }
-

@@ -6,6 +6,6 @@
   transition: ease 0.5s;
 }
 .element__image:hover {
-cursor: pointer;
-filter: brightness(120%) contrast(1.1);
+  cursor: pointer;
+  filter: brightness(120%) contrast(1.1);
 }
