@@ -4,6 +4,8 @@
 @import url('./__like/element__like.css');
 @import url('./__like-counter/element__like-counter.css');
 @import url('./__delete-button/element__delete-button.css');
+@import url('./__delete-button_visible/element__delete-button_visible.css');
+@import url('./__delete-button_hidden/element__delete-button_hidden.css');
 .element {
   position: relative;
   display: flex;
