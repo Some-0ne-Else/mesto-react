@@ -2,53 +2,18 @@ import React from 'react';
 import Card from './Card.js';
 import editButtonImage from '../images/profile__edit-button_image.svg';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
-import { cardsPostfix } from '../utils/constants.js';
-import api from '../utils/Api.js';
-function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
+function Main({
+  cards,
+  onEditAvatar,
+  onEditProfile,
+  onAddPlace,
+  onCardClick,
+  onCardLike,
+  onCardDelete,
+}) {
   const currentUser = React.useContext(CurrentUserContext);
-  const [cards, setCards] = React.useState([]);
-  function handleCardLike(card) {
-    // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    // Отправляем запрос в API и получаем обновлённые данные карточки
-    api
-      .likeCard(cardsPostfix, card._id, isLiked)
-      .then((newCard) => {
-        // Формируем новый массив на основе имеющегося, подставляя в него новую карточку
-        const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
-        // Обновляем стейт
-        setCards(newCards);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-  function handleCardDelete(card) {
-    console.log('card._id', card._id);
-    /* cards state updated only in case of response success */
-    api
-      .deleteCard(`${cardsPostfix}/${card._id}`)
-      .then(() => setCards(cards.filter((c) => c._id !== card._id)))
-      .catch((err) => console.log(err));
-  }
-  React.useEffect(() => {
-    api
-      .fetchData(cardsPostfix)
-      .then((dataCards) =>
-        setCards(
-          dataCards.map((item) => ({
-            _id: item._id,
-            name: item.name,
-            link: item.link,
-            likes: item.likes,
-            ownerId: item.owner._id,
-          }))
-        )
-      )
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+
+  React.useEffect(() => {}, []);
 
   return (
     <main className="content">
@@ -88,8 +53,8 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
             likes={card.likes}
             likeCounter={card.likes.length}
             onCardClick={onCardClick}
-            onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}
+            onCardLike={onCardLike}
+            onCardDelete={onCardDelete}
             card={card}
           />
         ))}

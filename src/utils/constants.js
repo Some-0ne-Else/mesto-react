@@ -1,3 +1,4 @@
+/*legacy code */
 /* page elements const */
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');

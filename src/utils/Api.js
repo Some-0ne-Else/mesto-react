@@ -30,7 +30,7 @@ class Api {
         name: `${name}`,
         about: `${about}`,
       }),
-    });
+    }).then((result) => result.json());
   }
 
   postCard(urlPostfix, name, link) {
@@ -82,17 +82,13 @@ class Api {
       body: JSON.stringify({
         avatar: `${link}`,
       }),
-    })
-      .then((result) => {
-        if (result.ok) {
-          return result.json();
-        } else {
-          return Promise.reject(`Ошибка: ${result.status}`);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((result) => {
+      if (result.ok) {
+        return result.json();
+      } else {
+        return Promise.reject(`Ошибка: ${result.status}`);
+      }
+    });
   }
 }
 
