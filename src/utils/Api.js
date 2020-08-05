@@ -30,9 +30,7 @@ class Api {
         name: `${name}`,
         about: `${about}`,
       }),
-    }).catch((err) => {
-      console.log(err);
-    }); //Эту часть не трогаю до след практ работы. Но логика ясна.
+    });
   }
 
   postCard(urlPostfix, name, link) {
@@ -60,8 +58,6 @@ class Api {
         authorization: this._token,
         'Content-Type': 'application/json',
       },
-    }).catch((err) => {
-      console.log(err);
     });
   }
   likeCard(urlPostfix, cardId, isLiked) {
@@ -73,9 +69,7 @@ class Api {
         authorization: this._token,
         'Content-Type': 'application/json',
       },
-    })
-      .then((result) => result.json())
-      .catch((err) => console.log(err));
+    }).then((result) => result.json());
   }
 
   updateAvatar(urlPostfix, link) {

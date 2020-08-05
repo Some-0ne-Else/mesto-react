@@ -3,6 +3,7 @@ import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
+import EditProfilePopup from './EditProfilePopup.js';
 import ImagePopup from './ImagePopup.js';
 import api from '../utils/Api.js';
 import { userInfoPostfix } from '../utils/constants.js';
@@ -20,11 +21,6 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState('');
   const cards = React.useContext(CardsContext);
 
-  // Создаём переменную, которую после зададим в `className` для кнопки удаления
-  // const cardDeleteButtonClassName = (
-  //   `card__delete-button ${isOwn ? 'card__delete-button_visible' : 'card__delete-button_hidden'}`
-  // );
-
   React.useEffect(() => {
     api
       .fetchData(userInfoPostfix)
@@ -39,6 +35,19 @@ function App() {
   function handleCardClick(e) {
     setSelectedCard(e.target);
     setImagePopupOpen(true);
+  }
+
+  function handleUpdateUser({ name, about }) {
+    api
+      .editProfile(userInfoPostfix, name, about)
+      .then(() => {
+        currentUser.name = name;
+        currentUser.about = about;
+        closeAllPopups();
+      }) /*probally it's bad practice, mb better way will be get a new data from server and set it in the state */
+      .catch((err) => {
+        console.log(err);
+      });
   }
   function handleEditProfileClick() {
     setEditProfilePopupOpen(true);
@@ -70,39 +79,6 @@ function App() {
               onCardClick={handleCardClick}
             />
             <Footer />
-            <PopupWithForm
-              name="edit"
-              title="Редактировать профиль"
-              actionCaption="Сохранить"
-              isOpen={isEditProfilePopupOpen}
-              onClose={closeAllPopups}
-            >
-              <input
-                type="text"
-                className="popup__input"
-                name="name"
-                id="full-name"
-                placeholder="Имя полностью"
-                minLength="2"
-                maxLength="40"
-                pattern="[a-zA-ZА-ЯЁа-яё\s\-]+[^\s\-]+"
-                required
-                noValidate
-              />
-              <p className="popup__input-error" id="full-name-error"></p>
-              <input
-                type="text"
-                className="popup__input"
-                name="about"
-                id="vocation"
-                placeholder="Призвание"
-                minLength="2"
-                maxLength="200"
-                required
-                noValidate
-              />
-              <p className="popup__input-error" id="vocation-error"></p>
-            </PopupWithForm>
 
             <PopupWithForm
               name="add"
@@ -160,6 +136,11 @@ function App() {
               />
               <p className="popup__input-error" id="link-error"></p>
             </PopupWithForm>
+            <EditProfilePopup
+              isOpen={isEditProfilePopupOpen}
+              onClose={closeAllPopups}
+              onUpdateUser={handleUpdateUser}
+            />
 
             <ImagePopup
               isOpen={isImagePopupOpen}

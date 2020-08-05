@@ -4,13 +4,17 @@ function PopupWithForm({
   name,
   title,
   onClose,
+  onSubmbit,
   isOpen,
   actionCaption,
   children,
 }) {
   return (
     <section className={`popup popup_${name} ${isOpen && 'popup_opened'}`}>
-      <form className={`popup__container popup__container_${name}`}>
+      <form
+        className={`popup__container popup__container_${name}`}
+        onSubmit={onSubmbit}
+      >
         <h2 className="popup__heading">{title}</h2>
         <button
           type="button"

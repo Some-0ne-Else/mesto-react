@@ -24,7 +24,12 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
       });
   }
   function handleCardDelete(card) {
-    console.log('delete work');
+    console.log('card._id', card._id);
+    /* cards state updated only in case of response success */
+    api
+      .deleteCard(`${cardsPostfix}/${card._id}`)
+      .then(() => setCards(cards.filter((c) => c._id !== card._id)))
+      .catch((err) => console.log(err));
   }
   React.useEffect(() => {
     api
