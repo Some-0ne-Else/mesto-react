@@ -44,11 +44,7 @@ class Api {
         name: `${name}`,
         link: `${link}`,
       }),
-    })
-      .then((result) => result.json())
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((result) => result.json());
   }
 
   deleteCard(urlPostfix) {
