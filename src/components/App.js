@@ -4,10 +4,10 @@ import Main from './Main.js';
 import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup.js';
-import { userInfoPostfix, cardsPostfix } from '../utils/constants.js';
 import api from '../utils/Api.js';
-import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
+import { userInfoPostfix } from '../utils/constants.js';
 import { CardsContext } from '../contexts/CardsContext.js';
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(
@@ -18,7 +18,7 @@ function App() {
   const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState('');
   const [currentUser, setCurrentUser] = React.useState('');
-  const [cards, setCards] = React.useState([]);
+  const cards = React.useContext(CardsContext);
 
   // Создаём переменную, которую после зададим в `className` для кнопки удаления
   // const cardDeleteButtonClassName = (
@@ -31,22 +31,6 @@ function App() {
       .then((userInfo) => {
         setCurrentUser(userInfo);
       })
-      .catch((err) => {
-        console.log(err);
-      });
-    api
-      .fetchData(cardsPostfix)
-      .then((dataCards) =>
-        setCards(
-          dataCards.map((item) => ({
-            id: item._id,
-            name: item.name,
-            link: item.link,
-            likes: item.likes,
-            ownerId: item.owner._id,
-          }))
-        )
-      )
       .catch((err) => {
         console.log(err);
       });

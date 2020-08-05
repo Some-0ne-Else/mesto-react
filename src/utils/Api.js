@@ -64,7 +64,7 @@ class Api {
       console.log(err);
     });
   }
-  likeCard(urlPostfix, cardId, likes, idOnServer, isLiked) {
+  likeCard(urlPostfix, cardId, isLiked) {
     let methodValue;
     isLiked ? (methodValue = 'DELETE') : (methodValue = 'PUT');
     return fetch(`${this._baseUrl}${urlPostfix}/likes/${cardId}`, {
