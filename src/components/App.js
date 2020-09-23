@@ -21,7 +21,7 @@ function App() {
   const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState('');
   const [currentUser, setCurrentUser] = React.useState('');
-
+  const [isLoading, setIsLoading] = React.useState('');
   const [cards, setCards] = React.useState([]);
 
   function handleCardLike(card) {
@@ -37,7 +37,6 @@ function App() {
       });
   }
   function handleCardDelete(card) {
-    console.log('card._id', card._id);
     /* cards state updated only in case of response success */
     api
       .deleteCard(`${cardsPostfix}/${card._id}`)
@@ -53,9 +52,10 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
+    setIsLoading(true);
     api
       .fetchData(cardsPostfix)
-      .then((dataCards) =>
+      .then((dataCards) => {
         setCards(
           dataCards.map((item) => ({
             _id: item._id,
@@ -64,8 +64,9 @@ function App() {
             likes: item.likes,
             ownerId: item.owner._id,
           }))
-        )
-      )
+        );
+        setIsLoading(false);
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -137,6 +138,7 @@ function App() {
               onCardClick={handleCardClick}
               onCardDelete={handleCardDelete}
               onCardLike={handleCardLike}
+              isLoading={isLoading}
             />
             <Footer />
 

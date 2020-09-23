@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './Card.js';
+import Spinner from './Spinner.js';
 import editButtonImage from '../images/profile__edit-button_image.svg';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 function Main({
@@ -10,6 +11,7 @@ function Main({
   onCardClick,
   onCardLike,
   onCardDelete,
+  isLoading,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -42,22 +44,26 @@ function Main({
         <button className="profile__add-button" onClick={onAddPlace}></button>
       </section>
       <section className="elements">
-        {cards.map((card) => (
-          <Card
-            title={card.name}
-            src={card.link}
-            alt={card.name}
-            key={card._id}
-            currentUser={currentUser._id}
-            ownerId={card.ownerId}
-            likes={card.likes}
-            likeCounter={card.likes.length}
-            onCardClick={onCardClick}
-            onCardLike={onCardLike}
-            onCardDelete={onCardDelete}
-            card={card}
-          />
-        ))}
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          cards.map((card) => (
+            <Card
+              title={card.name}
+              src={card.link}
+              alt={card.name}
+              key={card._id}
+              currentUser={currentUser._id}
+              ownerId={card.ownerId}
+              likes={card.likes}
+              likeCounter={card.likes.length}
+              onCardClick={onCardClick}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
+              card={card}
+            />
+          ))
+        )}
       </section>
     </main>
   );
